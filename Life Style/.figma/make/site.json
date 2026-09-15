@@ -1,0 +1,10 @@
+{
+  "description": "Delivers pixel-perfect mobile interface replicas with precise style and size adaptation for seamless mobile user experience and design validation.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

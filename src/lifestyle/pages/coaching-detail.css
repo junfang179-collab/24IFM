@@ -1,0 +1,75 @@
+.coaching-detail { background:#f6fbfe; color:#16324f; display:flex; flex-direction:column; height:100%; margin:0 auto; max-width:440px; min-height:100%; overflow:hidden; position:relative; width:100%; }
+.coaching-detail button,.coaching-detail a { font-family:inherit; }
+.coaching-detail__topbar { align-items:center; background:#fff; border-bottom:1px solid #cfe8f3; box-sizing:border-box; display:flex; flex:0 0 112px; gap:12px; padding:44px 16px 12px; position:relative; z-index:3; }
+.coaching-detail__topbar>button { align-items:center; background:#eff8fd; border:0; border-radius:50%; color:#1c9dd7; cursor:pointer; display:flex; flex:0 0 44px; height:44px; justify-content:center; padding:0; width:44px; }
+.coaching-detail__topbar>div { left:50%; max-width:calc(100% - 152px); min-width:0; position:absolute; text-align:center; transform:translateX(-50%); }
+.coaching-detail__topbar strong { color:#16324f; display:block; font:900 17px/1.2 "Inter:Extra Bold",sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__topbar span { color:#6d8798; display:block; font:700 11px/1.2 "Inter:Semi Bold",sans-serif; margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__scroll { box-sizing:border-box; flex:1; min-height:0; overflow-x:hidden; overflow-y:auto; padding:12px 12px 90px; scrollbar-width:none; }
+.coaching-detail__scroll::-webkit-scrollbar { display:none; }
+.coaching-detail__hero { border-radius:18px; box-shadow:0 8px 20px rgba(22,50,79,.14); height:138px; overflow:hidden; position:relative; }
+.coaching-detail__hero>img { display:block; height:100%; object-fit:cover; width:100%; }
+.coaching-detail__hero::after { background:linear-gradient(90deg,rgba(238,248,252,.96),rgba(238,248,252,.18)); content:""; inset:0; position:absolute; }
+.coaching-detail__hero-overlay { color:#16324f; left:16px; position:absolute; top:18px; z-index:1; }
+.coaching-detail__hero-overlay>span { display:block; font:700 9px/1 "Inter:Bold",sans-serif; letter-spacing:.08em; opacity:.78; }
+.coaching-detail__hero-overlay>strong { display:block; font:900 22px/1.08 "Inter:Extra Bold",sans-serif; margin-top:7px; max-width:195px; }
+.coaching-detail__hero-overlay>small { align-items:center; display:flex; font:700 9px/1.2 "Inter:Bold",sans-serif; gap:5px; margin-top:8px; }
+.coaching-detail__hero-overlay svg { color:#1c9dd7; }
+.coaching-detail__identity { align-items:flex-start; background:#fff; border:1px solid #dceaf3; border-radius:15px; display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; padding:14px; }
+.coaching-detail__provider-mark { align-items:center; background:#e9f7fd; border:1px solid #bce5f4; border-radius:50%; color:#1c9dd7; display:flex; flex:0 0 44px; height:44px; justify-content:center; }
+.coaching-detail__identity-copy { flex:1; min-width:0; padding-top:2px; }
+.coaching-detail__identity-copy h1 { color:#16324f; font:800 17px/1.16 "Inter:Extra Bold",sans-serif; margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__identity-copy>span { color:#61798d; display:block; font:600 10px/1.2 "Inter:Semi Bold",sans-serif; margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__list-meta { border-top:1px solid #e3eef4; flex:0 0 100%; margin-top:2px; padding-top:10px; }
+.coaching-detail__list-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.coaching-detail__discount-badge,.coaching-detail__list-tag { align-items:center; border-radius:5px; display:inline-flex; font:500 9px/1.2 "Inter:Medium",sans-serif; gap:3px; max-width:100%; padding:4px 6px; }
+.coaching-detail__discount-badge { background:#e9f7fd; color:#128fca; }
+.coaching-detail__list-tag.is-category { background:#eff9fd; color:#477087; }
+.coaching-detail__list-tag.is-offer { background:#fff4eb; color:#de7130; }
+.coaching-detail__discount-badge svg,.coaching-detail__list-tag svg { flex:0 0 12px; }
+.coaching-detail__discount-badge svg,.coaching-detail__list-tag.is-category svg { color:#1c9dd7; }
+.coaching-detail__list-tag.is-offer svg { color:#ed8a47; }
+.coaching-detail__list-summary { align-items:center; display:flex; gap:10px; justify-content:space-between; margin-top:9px; min-width:0; }
+.coaching-detail__list-summary strong { color:#128fca; font:800 11px/1.2 "Inter:Extra Bold",sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__list-summary span { align-items:center; color:#718493; display:flex; flex:0 0 auto; font:500 9px/1.2 "Inter:Medium",sans-serif; gap:3px; white-space:nowrap; }
+.coaching-detail__list-summary svg { color:#1c9dd7; flex:0 0 12px; }
+.coaching-detail__content { padding:0; }
+.coaching-detail__section { background:#fff; border:1px solid #dceaf3; border-radius:15px; margin-bottom:12px; padding:14px; }
+.coaching-detail__section h2 { color:#16324f; font:800 15px/1.2 "Inter:Extra Bold",sans-serif; margin:0; }
+.coaching-detail__section>p { color:#526f86; font:400 12px/1.5 "Inter:Regular",sans-serif; margin:8px 0 0; }
+.coaching-detail__section-title { align-items:center; color:#1c9dd7; display:flex; gap:8px; }
+.coaching-detail__section-title-icon { align-items:center; background:#eff9fd; border:0; border-radius:50%; box-sizing:border-box; display:flex; flex:0 0 28px; height:28px; justify-content:center; width:28px; }
+.coaching-detail__section-title-icon svg { color:#1c9dd7; fill:none; stroke:currentColor; }
+.coaching-detail__section-title h2 { color:#16324f; }
+.coaching-detail__intro-card { box-shadow:0 4px 12px rgba(20,40,70,.04); }
+.coaching-detail__service-list { display:grid; gap:7px; margin-top:12px; }
+.coaching-detail__service-row { align-items:center; background:#f7fbfd; border:1px solid #d7e8f2; border-radius:11px; display:flex; gap:9px; min-width:0; padding:8px; }
+.coaching-detail__service-icon { align-items:center; background:#e0f5fe; border-radius:8px; color:#1c9dd7; display:flex; flex:0 0 36px; height:36px; justify-content:center; width:36px; }
+.coaching-detail__service-copy { flex:1; min-width:0; }
+.coaching-detail__service-copy strong,.coaching-detail__service-copy span { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.coaching-detail__service-copy strong { color:#16324f; font:700 11px/1.2 "Inter:Bold",sans-serif; }
+.coaching-detail__service-copy span { color:#61798d; font:500 9px/1.3 "Inter:Medium",sans-serif; margin-top:3px; }
+.coaching-detail__service-row>small { color:#128fca; flex:0 0 auto; font:800 10px/1.2 "Inter:Extra Bold",sans-serif; text-align:right; white-space:nowrap; }
+.coaching-detail__service-row>small span { color:#718493; font:500 8px/1.2 "Inter:Medium",sans-serif; margin-left:2px; }
+.coaching-detail__highlight-card { background:#eef8fc; border-color:#c8e7f2; }
+.coaching-detail__highlights { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:12px; }
+.coaching-detail__highlights>div { align-items:center; border-right:1px solid #cfe5ee; color:#1c9dd7; display:flex; gap:5px; justify-content:center; min-width:0; padding:1px 4px; }
+.coaching-detail__highlights>div:last-child { border-right:0; }
+.coaching-detail__highlights span { color:#466d87; font:500 9px/1.3 "Inter:Medium",sans-serif; }
+.coaching-detail__info-section { padding-bottom:13px; }
+.coaching-detail__hours { color:#526f86; display:grid; font:500 11px/1.35 "Inter:Medium",sans-serif; gap:7px; margin:8px 0 0 36px; }
+.coaching-detail__hours div { display:flex; gap:12px; justify-content:space-between; }
+.coaching-detail__hours dt,.coaching-detail__hours dd { margin:0; }
+.coaching-detail__hours dd { color:#31536f; text-align:right; white-space:nowrap; }
+.coaching-detail__location { align-items:center; display:flex; gap:12px; justify-content:space-between; margin:0 0 0 36px; }
+.coaching-detail__location address { color:#31536f; font:500 11px/1.42 "Inter:Medium",sans-serif; font-style:normal; max-width:185px; }
+.coaching-detail__location a { align-items:center; background:#eef8fc; border:1px solid #bfe5f2; border-radius:50%; color:#128fca; display:flex; flex:0 0 44px; height:44px; justify-content:center; padding:0; text-decoration:none; width:44px; }
+.coaching-detail__location a svg { fill:currentColor; flex:0 0 19px; stroke:none; }
+.coaching-detail__location a svg * { stroke:none; }
+.coaching-detail__bottom-bar { align-items:center; background:rgba(255,255,255,.97); border-top:1px solid #d9e8ef; bottom:0; box-shadow:0 -10px 30px rgba(20,40,70,.08); box-sizing:border-box; display:flex; gap:12px; left:0; min-height:82px; padding:12px 16px; position:absolute; width:100%; z-index:10; }
+.coaching-detail__bottom-action { align-content:center; align-items:center; background:#1c9dd0; border-radius:14px; color:#fff; display:grid; flex:1; grid-template-columns:minmax(0,1fr) 36px; grid-template-rows:auto auto; height:56px; min-width:0; padding:0 16px; row-gap:4px; text-decoration:none; }
+.coaching-detail__bottom-action span { color:rgba(255,255,255,.78); font:500 10px/1.1 "Inter:Medium",sans-serif; }
+.coaching-detail__bottom-action strong { font:800 15px/1.1 "Inter:Extra Bold",sans-serif; }
+.coaching-detail__bottom-action svg { align-self:center; background:rgba(255,255,255,.18); border-radius:10px; grid-column:2; grid-row:1/span 2; height:36px; padding:8px; width:36px; }
+.coaching-detail__topbar>button:focus-visible,.coaching-detail__location a:focus-visible,.coaching-detail__bottom-action:focus-visible { outline:2px solid #1c9dd7; outline-offset:2px; }
+@media (max-width:360px) { .coaching-detail__topbar { padding-left:12px; padding-right:12px; } .coaching-detail__scroll { padding-left:10px; padding-right:10px; } .coaching-detail__service-card { padding-left:6px; padding-right:6px; } }

@@ -1,0 +1,10 @@
+{
+  "description": "Transform design mockups into fully functional web applications, enabling designers and developers to streamline the development process and enhance collaboration.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
