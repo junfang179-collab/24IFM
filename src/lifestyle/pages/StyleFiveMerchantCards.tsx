@@ -77,14 +77,6 @@ export default function StyleFiveMerchantCards({
                 {service.badge}
               </span>
             )}
-            {!useAllServiceCard && (
-              <span
-                className="lifestyle-style-five__service-mode"
-                data-mode={service.distance}
-              >
-                {service.distance}
-              </span>
-            )}
           </div>
           <div className="lifestyle-style-five__service-content">
             <div className="lifestyle-style-five__service-title">

@@ -65,12 +65,8 @@
 .lifestyle-style-five__service-content { display: flex; flex: 1; flex-direction: column; min-width: 0; overflow: hidden; padding: 8px 9px 9px; }
 .lifestyle-style-five__service-title { align-items: flex-start; display: flex; min-width: 0; }
 .lifestyle-style-five__service h3 { color: #16324f; display: -webkit-box; font: 800 12px/1.2 "Inter:Extra Bold", sans-serif; margin: 0; min-width: 0; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.lifestyle-style-five__service-badge, .lifestyle-style-five__service-mode { border-radius: 4px; font: 700 8px/1 "Inter:Bold", sans-serif; max-width: calc(100% - 12px); overflow: hidden; padding: 3px 5px; position: absolute; text-overflow: ellipsis; white-space: nowrap; }
+.lifestyle-style-five__service-badge { border-radius: 4px; font: 700 8px/1 "Inter:Bold", sans-serif; max-width: calc(100% - 12px); overflow: hidden; padding: 3px 5px; position: absolute; text-overflow: ellipsis; white-space: nowrap; }
 .lifestyle-style-five__service-badge { background: rgba(255,255,255,.94); border: 1px solid rgba(215,232,242,.96); color: #127faf; left: 6px; top: 6px; }
-.lifestyle-style-five__service-mode { background: #455a64; bottom: 6px; box-shadow: 0 1px 3px rgba(15,40,60,.18); color: #fff; right: 6px; }
-.lifestyle-style-five__service-mode[data-mode="On-site"] { background: #126f9a; }
-.lifestyle-style-five__service-mode[data-mode="Home visit"] { background: #28784f; }
-.lifestyle-style-five__service-mode[data-mode="Their venue"] { background: #6656a8; }
 .lifestyle-style-five__service-summary { color: #61798d; font: 500 9px/1.25 "Inter:Medium", sans-serif; margin-top: 3px !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lifestyle-style-five__service p { margin: 0; }
 .lifestyle-style-five__trust { align-items: center; color: #128fca; display: flex; font: 600 9px/1.2 "Inter:Semi Bold", sans-serif; gap: 3px; margin-top: 5px; min-width: 0; }
