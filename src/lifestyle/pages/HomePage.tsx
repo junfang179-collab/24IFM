@@ -360,9 +360,9 @@ export default function HomePage({ onBack, initialStyle }: HomePageProps) {
   const [heroIndex, setHeroIndex] = useState(0)
   const [heroDrag, setHeroDrag] = useState(0)
   const [heroPaused, setHeroPaused] = useState(false)
-  const [selectedStyle, setSelectedStyle] = useState(() =>
-    initialStyle && initialStyle in stylePageByOption ? initialStyle : "Style 5",
-  )
+  // Lifestyle now exposes Style 5 only; retain the prop for compatible route calls.
+  void initialStyle
+  const [selectedStyle, setSelectedStyle] = useState("Style 5")
 
   useEffect(() => {
     let revealTimeout: number | undefined

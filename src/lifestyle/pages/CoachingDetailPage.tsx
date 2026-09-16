@@ -5,6 +5,7 @@ import {
   ArrowLeft01Icon,
   Award01Icon,
   Call02Icon,
+  CatalogueIcon,
   CheckmarkCircle01Icon,
   Clock03Icon,
   HeartIcon,
@@ -174,20 +175,13 @@ export default function CoachingDetailPage() {
           <section className="coaching-detail__section">
             <div className="coaching-detail__section-title">
               <span className="coaching-detail__section-title-icon" aria-hidden="true">
-                <HugeiconsIcon icon={Dumbbell01Icon} size={17} strokeWidth={1.8} />
+                <HugeiconsIcon icon={CatalogueIcon} size={17} strokeWidth={1.8} />
               </span>
               <h2>Services</h2>
             </div>
             <div className="coaching-detail__service-list">
               {serviceDetails.items.map((service, index) => (
                 <article className="coaching-detail__service-row" key={service.title}>
-                  <span className="coaching-detail__service-icon" aria-hidden="true">
-                    <HugeiconsIcon
-                      icon={serviceDetails.icon}
-                      size={20}
-                      strokeWidth={1.7}
-                    />
-                  </span>
                   <div className="coaching-detail__service-copy">
                     <strong>{service.title}</strong>
                     <span>{service.description}</span>
