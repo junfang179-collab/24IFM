@@ -60,6 +60,9 @@
 .lifestyle-style-five__service-list.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
 .lifestyle-style-five__service-list:focus-visible { outline: 2px solid var(--style-five-primary); outline-offset: 2px; }
 .lifestyle-style-five__service { background: #fff; border: 1px solid #d4e6f0; border-radius: 10px; box-shadow: 0 3px 10px rgba(20,40,70,.07); box-sizing: border-box; display: flex; flex: 0 0 calc((100% - 30px) / 2); flex-direction: column; min-height: 0; min-width: 0; overflow: hidden; position: relative; scroll-snap-align: start; }
+.lifestyle-style-five__service:where(button) { cursor:pointer; font-family:inherit; padding:0; text-align:left; }
+.lifestyle-style-five__service:where(button):hover { border-color:#9fd7ee; box-shadow:0 5px 13px rgba(20,40,70,.12); }
+.lifestyle-style-five__service:where(button):focus-visible { outline:2px solid var(--style-five-primary); outline-offset:2px; }
 .lifestyle-style-five__service-visual { background: #eaf5fa; flex: 0 0 100px; overflow: hidden; position: relative; }
 .lifestyle-style-five__service-visual > img { display: block; height: 100%; object-fit: cover; width: 100%; }
 .lifestyle-style-five__service-content { display: flex; flex: 1; flex-direction: column; min-width: 0; overflow: hidden; padding: 8px 9px 9px; }

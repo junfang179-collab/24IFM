@@ -14,6 +14,8 @@ interface StyleFiveMerchantCardsProps {
   ariaLabel?: string
   showTrust?: boolean
   useAllServiceCard?: boolean
+  onServiceClick?: (service: LifestyleService) => void
+  isServiceClickable?: (service: LifestyleService) => boolean
 }
 
 type DragPointer = { id: number startX: number startScroll: number }
@@ -24,13 +26,17 @@ export default function StyleFiveMerchantCards({
   ariaLabel = "Popular merchants carousel",
   showTrust = true,
   useAllServiceCard = false,
+  onServiceClick,
+  isServiceClickable,
 }: StyleFiveMerchantCardsProps) {
   const pointerRef = useRef<DragPointer | null>(null)
+  const suppressClickRef = useRef(false)
   const [isDragging, setIsDragging] = useState(false)
 
   const finishDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     const pointer = pointerRef.current
     if (!pointer || pointer.id !== event.pointerId) return
+    suppressClickRef.current = Math.abs(event.clientX - pointer.startX) > 8
     pointerRef.current = null
     setIsDragging(false)
     event.currentTarget.releasePointerCapture?.(event.pointerId)
@@ -51,6 +57,7 @@ export default function StyleFiveMerchantCards({
           startX: event.clientX,
           startScroll: event.currentTarget.scrollLeft,
         }
+        suppressClickRef.current = false
         setIsDragging(true)
         event.currentTarget.setPointerCapture?.(event.pointerId)
       }}
@@ -62,14 +69,19 @@ export default function StyleFiveMerchantCards({
       }}
       onPointerUp={finishDrag}
       onPointerCancel={finishDrag}
+      onClickCapture={(event) => {
+        if (!suppressClickRef.current) return
+        event.preventDefault()
+        event.stopPropagation()
+        suppressClickRef.current = false
+      }}
     >
-      {services.map((service) => (
-        <article
-          className={`lifestyle-style-five__service${
-            useAllServiceCard ? " is-all-services" : ""
-          }`}
-          key={service.name}
-        >
+      {services.map((service) => {
+        const cardClass = `lifestyle-style-five__service${
+          useAllServiceCard ? " is-all-services" : ""
+        }`
+        const cardContent = (
+          <>
           <div className="lifestyle-style-five__service-visual">
             <img src={service.image} alt={service.name} loading="lazy" />
             {/^(?:[0-9]+%|\$[0-9]+)\s*OFF\b/i.test(service.badge.trim()) && (
@@ -136,8 +148,27 @@ export default function StyleFiveMerchantCards({
               )
             )}
           </div>
-        </article>
-      ))}
+          </>
+        )
+
+        const canOpen = onServiceClick && (isServiceClickable?.(service) ?? true)
+
+        return canOpen ? (
+          <button
+            className={cardClass}
+            key={service.name}
+            type="button"
+            onClick={() => onServiceClick?.(service)}
+            aria-label={`Open ${service.name}`}
+          >
+            {cardContent}
+          </button>
+        ) : (
+          <article className={cardClass} key={service.name}>
+            {cardContent}
+          </article>
+        )
+      })}
       {services.length === 0 && (
         <p className="lifestyle-style-five__empty">{emptyMessage}</p>
       )}

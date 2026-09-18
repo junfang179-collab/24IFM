@@ -13,7 +13,6 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import {
   Cancel01Icon,
   DiscountTag01Icon,
-  FilterIcon,
   MapPinIcon,
   Tag01Icon,
 } from "@hugeicons/core-free-icons"
@@ -105,18 +104,6 @@ function sortMerchants(list: DirectoryMerchant[], sort: string) {
     )
   else sorted.sort((a, b) => b.likes - a.likes)
   return sorted
-}
-
-function countActiveFilters(filters: DirectoryFilters) {
-  return (
-    (filters.location ? 1 : 0) +
-    (filters.priceRange[0] > PRICE_MIN || filters.priceRange[1] < PRICE_MAX
-      ? 1
-      : 0) +
-    filters.availability.length +
-    filters.offers.length +
-    (filters.sort !== sortOptions[0] ? 1 : 0)
-  )
 }
 
 function SearchGlyph() {
@@ -384,11 +371,6 @@ export default function CoachingListPage() {
     )
   }, [group, query, filters])
 
-  const activeCount = countActiveFilters(filters)
-  const openSheet = () => {
-    setPending(filters)
-    setSheetOpen(true)
-  }
   const closeSheet = () => setSheetOpen(false)
   const patchPending = (patch: Partial<DirectoryFilters>) =>
     setPending((current) => ({ ...current, ...patch }))
@@ -402,24 +384,6 @@ export default function CoachingListPage() {
       <StyleTwoPageHeader
         title={directoryGroupTitles[group] ?? "All services"}
         onBack={() => navigate(-1)}
-        trailing={
-          <button
-            type="button"
-            className="coaching-filter-trigger"
-            aria-haspopup="dialog"
-            aria-expanded={sheetOpen}
-            onClick={openSheet}
-          >
-            <HugeiconsIcon
-              icon={FilterIcon}
-              size={13}
-              strokeWidth={1.8}
-              aria-hidden="true"
-            />
-            <span>Filter</span>
-            {activeCount > 0 && <strong>{activeCount}</strong>}
-          </button>
-        }
       />
       <section
         className="service-content coaching-list__content"

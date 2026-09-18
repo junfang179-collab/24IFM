@@ -520,6 +520,15 @@ const styleFiveDirectorySections = styleFiveCategoryGroups.map(
   }),
 )
 
+function getCoachingDetailName(name: string) {
+  if (name === "AquaStart Coaching") return "AquaKids Swimming"
+  return directoryMerchants.some(
+    (merchant) => merchant.group === "Coaching" && merchant.name === name,
+  )
+    ? name
+    : undefined
+}
+
 const searchSuggestions = [
   "Swimming",
   "Yoga",
@@ -910,6 +919,14 @@ export default function StyleFiveHomePage({
                   ariaLabel={`${section.title} merchants`}
                   showTrust={!isPromotionalSection}
                   useAllServiceCard={section.useAllServiceCard}
+                  isServiceClickable={(service) =>
+                    Boolean(getCoachingDetailName(service.name))
+                  }
+                  onServiceClick={(merchant) => {
+                    const detailName = getCoachingDetailName(merchant.name)
+                    if (!detailName) return
+                    navigate(`/coaching/${encodeURIComponent(detailName)}`)
+                  }}
                 />
               </section>
             )
