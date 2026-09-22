@@ -84,11 +84,6 @@ export default function StyleFiveMerchantCards({
           <>
           <div className="lifestyle-style-five__service-visual">
             <img src={service.image} alt={service.name} loading="lazy" />
-            {/^(?:[0-9]+%|\$[0-9]+)\s*OFF\b/i.test(service.badge.trim()) && (
-              <span className="lifestyle-style-five__service-badge">
-                {service.badge}
-              </span>
-            )}
           </div>
           <div className="lifestyle-style-five__service-content">
             <div className="lifestyle-style-five__service-title">

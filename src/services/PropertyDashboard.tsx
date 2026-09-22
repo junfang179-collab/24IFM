@@ -5,39 +5,43 @@ import {
   ArrowDown01Icon,
   ArrowLeft01Icon,
   ArrowRight01Icon,
+  Agreement01Icon,
+  Alert02Icon,
+  ApartmentIcon,
+  BankIcon,
   Building01Icon,
+  Building03Icon,
   CheckListIcon,
+  ChatFeedback01Icon,
   DashboardSquare01Icon,
   File01Icon,
   FilterIcon,
   Menu01Icon,
   MoreHorizontalIcon,
-  News01Icon,
   Notification01Icon,
+  PropertyViewIcon,
   Search01Icon,
   Settings01Icon,
-  Store01Icon,
-  UserAccountIcon,
+  Wrench01Icon,
 } from "@hugeicons/core-free-icons"
 import logoDark from "../imports/logo-dark.png"
+import PortalSwitcher from "../components/PortalSwitcher"
 
 type PropertyView = "tender-list" | "tender-create"
 
 const navItems = [
   { label: "Dashboard", icon: DashboardSquare01Icon },
   { label: "System", icon: Settings01Icon, chevron: true },
-  { label: "Property News", icon: News01Icon, chevron: true },
-  {
-    label: "Property Company",
-    icon: Building01Icon,
-    chevron: true,
-    children: ["Companies", "Accounts", "Menus"],
-  },
-  { label: "Marketplace", icon: Store01Icon, chevron: true },
-  { label: "Merchant", icon: UserAccountIcon, chevron: true },
-  { label: "Rewards", icon: File01Icon, chevron: true },
-  { label: "Latest", icon: Notification01Icon, chevron: true },
-  { label: "News Feed", icon: File01Icon },
+  { label: "Estate", icon: Building03Icon, chevron: true },
+  { label: "Online Form", icon: File01Icon, chevron: true },
+  { label: "Facility", icon: Wrench01Icon, chevron: true },
+  { label: "Feedback", icon: ChatFeedback01Icon, chevron: true },
+  { label: "Notice Board", icon: Alert02Icon, chevron: true },
+  { label: "Strata Management", icon: ApartmentIcon, chevron: true },
+  { label: "Contracts", icon: Agreement01Icon, chevron: true },
+  { label: "Maintenance", icon: Building01Icon, chevron: true },
+  { label: "Manage Estate", icon: PropertyViewIcon, chevron: true },
+  { label: "Finance", icon: BankIcon, chevron: true },
 ]
 
 function Icon({
@@ -113,15 +117,8 @@ function PropertySidebar({
             >
               <Icon icon={item.icon} size={19} />
               <span>{item.label}</span>
-              {item.chevron && <Icon icon={ArrowDown01Icon} size={14} />}
+              {item.chevron && <Icon icon={ArrowRight01Icon} size={14} />}
             </button>
-            {item.children && (
-              <div className="property-nav-children">
-                {item.children.map((child) => (
-                  <span key={child}>{child}</span>
-                ))}
-              </div>
-            )}
           </div>
         ))}
         <div className="property-nav-section">Procurement</div>
@@ -145,21 +142,21 @@ function PropertySidebar({
             <button
               type="button"
               className={`property-subnav-item ${
+                view === "tender-create" ? "active" : ""
+              }`}
+              onClick={() => onView("tender-create")}
+            >
+              <span>Create Tender / Project</span>
+            </button>
+            <button
+              type="button"
+              className={`property-subnav-item ${
                 view === "tender-list" ? "active" : ""
               }`}
               onClick={() => onView("tender-list")}
             >
               <span>Tender Board / Bids</span>
               <span className="subnav-count">7</span>
-            </button>
-            <button
-              type="button"
-              className={`property-subnav-item ${
-                view === "tender-create" ? "active" : ""
-              }`}
-              onClick={() => onView("tender-create")}
-            >
-              <span>Create Tender / Project</span>
             </button>
             <button
               type="button"
@@ -203,20 +200,6 @@ function PropertySidebar({
             </button>
           </div>
         )}
-        <button type="button" className="property-nav-item">
-          <Icon icon={Building01Icon} size={19} />
-          <span>Maintenance</span>
-          <Icon icon={ArrowDown01Icon} size={14} />
-        </button>
-        <button type="button" className="property-nav-item">
-          <Icon icon={File01Icon} size={19} />
-          <span>Finance</span>
-          <Icon icon={ArrowDown01Icon} size={14} />
-        </button>
-        <button type="button" className="property-nav-item">
-          <Icon icon={Building01Icon} size={19} />
-          <span>Contracts</span>
-        </button>
       </nav>
     </aside>
   )
@@ -743,8 +726,12 @@ function TenderCreate({ onBack }: { onBack: () => void }) {
   )
 }
 
-export default function PropertyDashboard({ onExit }: { onExit: () => void }) {
-  const [view, setView] = useState<PropertyView>("tender-list")
+export default function PropertyDashboard({
+  onSwitchPortal,
+}: {
+  onSwitchPortal: (portal: "property-dashboard" | "merchant-dashboard" | "finance-dashboard") => void
+}) {
+  const [view, setView] = useState<PropertyView>("tender-create")
   return (
     <div className="property-app figma-capture-root">
       <PropertySidebar view={view} onView={setView} />
@@ -756,9 +743,7 @@ export default function PropertyDashboard({ onExit }: { onExit: () => void }) {
           ) : (
             <TenderCreate onBack={() => setView("tender-list")} />
           )}
-          <button type="button" className="property-exit" onClick={onExit}>
-            切换端口
-          </button>
+          <PortalSwitcher current="property-dashboard" onSwitch={onSwitchPortal} />
         </main>
       </div>
     </div>

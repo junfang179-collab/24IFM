@@ -174,6 +174,7 @@ export default function CopyToFigmaButton() {
     setErrorMessage("")
 
     let restoreClipboardBridge: (() => void) | null = null
+    const captureRoot = document.querySelector<HTMLElement>(CAPTURE_SELECTOR)
 
     try {
       await ensureCaptureScript()
@@ -183,6 +184,10 @@ export default function CopyToFigmaButton() {
 
       const clipboardBridge = installClipboardBridge()
       restoreClipboardBridge = clipboardBridge.restore
+      captureRoot?.classList.add("is-figma-capturing")
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+      })
       const captureResultPromise = window.figma.captureForDesign({
         selector: CAPTURE_SELECTOR,
         extractSourceData: false,
@@ -208,6 +213,7 @@ export default function CopyToFigmaButton() {
       setErrorMessage(message)
       showIdleAfterDelay()
     } finally {
+      captureRoot?.classList.remove("is-figma-capturing")
       restoreClipboardBridge?.()
     }
   }

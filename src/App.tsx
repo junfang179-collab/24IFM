@@ -742,7 +742,7 @@ export default function App() {
   if (screen === "property-dashboard") {
     return (
       <>
-        <PropertyDashboard onExit={() => setScreen("home")} />
+        <PropertyDashboard onSwitchPortal={setScreen} />
         <CopyToFigmaButton />
       </>
     )
@@ -751,7 +751,7 @@ export default function App() {
   if (screen === "merchant-dashboard") {
     return (
       <>
-        <MerchantDashboard onExit={() => setScreen("home")} />
+        <MerchantDashboard onSwitchPortal={setScreen} />
         <CopyToFigmaButton />
       </>
     )
@@ -760,7 +760,7 @@ export default function App() {
   if (screen === "finance-dashboard") {
     return (
       <>
-        <FinanceDashboard onExit={() => setScreen("home")} />
+        <FinanceDashboard onSwitchPortal={setScreen} />
         <CopyToFigmaButton />
       </>
     )
@@ -917,6 +917,7 @@ export default function App() {
                   }}
                 >
                   <div
+                    className="figma-design-canvas"
                     style={{
                       width: DESIGN_W,
                       zoom: SCALE,
@@ -965,6 +966,7 @@ export default function App() {
                   }}
                 >
                   <div
+                    className="figma-design-canvas"
                     style={{
                       width: DESIGN_W,
                       height: 205,

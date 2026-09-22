@@ -25,10 +25,27 @@ type CoachingDetail = {
   description: string
   gallery: string[]
   rates: { title: string; duration: string; price: string }[]
-  timetable: { days: string; sessions: { title: string; time: string }[] }[]
+  timetable: {
+    days: string
+    openingHours: string
+    sessions: { title: string }[]
+  }[]
 }
 
 type GalleryPointer = { id: number; startX: number; width: number }
+
+function formatRateRange(
+  rates: CoachingDetail["rates"],
+  fallbackPrice: number,
+) {
+  const prices = rates
+    .map((rate) => Number(rate.price.replace(/[^0-9.]/g, "")))
+    .filter(Number.isFinite)
+  const lowest = prices.length > 0 ? Math.min(...prices) : fallbackPrice
+  const highest = prices.length > 0 ? Math.max(...prices) : fallbackPrice
+
+  return lowest === highest ? `$${lowest}` : `$${lowest}-${highest}`
+}
 
 const defaultDetail: CoachingDetail = {
   area: "Singapore Sports Hub",
@@ -50,16 +67,18 @@ const defaultDetail: CoachingDetail = {
   timetable: [
     {
       days: "Mon-Fri",
+      openingHours: "10:00 AM - 8:00 PM",
       sessions: [
-        { title: "Beginner coaching", time: "4:30 PM" },
-        { title: "Skills practice", time: "6:00 PM" },
+        { title: "Beginner coaching" },
+        { title: "Skills practice" },
       ],
     },
     {
       days: "Sat-Sun",
+      openingHours: "9:00 AM - 6:00 PM",
       sessions: [
-        { title: "Small-group coaching", time: "9:00 AM" },
-        { title: "Private coaching", time: "11:30 AM" },
+        { title: "Small-group coaching" },
+        { title: "Private coaching" },
       ],
     },
   ],
@@ -87,16 +106,18 @@ const detailsByMerchant: Record<string, Partial<CoachingDetail>> = {
     timetable: [
       {
         days: "Mon-Fri",
+        openingHours: "4:00 PM - 8:00 PM",
         sessions: [
-          { title: "Kids Confidence", time: "4:30 PM" },
-          { title: "Adult Beginner", time: "7:00 PM" },
+          { title: "Kids Confidence" },
+          { title: "Adult Beginner" },
         ],
       },
       {
         days: "Sat-Sun",
+        openingHours: "9:00 AM - 6:00 PM",
         sessions: [
-          { title: "Learn to Swim", time: "9:00 AM" },
-          { title: "Private coaching", time: "11:30 AM" },
+          { title: "Learn to Swim" },
+          { title: "Private coaching" },
         ],
       },
     ],
@@ -122,16 +143,18 @@ const detailsByMerchant: Record<string, Partial<CoachingDetail>> = {
     timetable: [
       {
         days: "Mon-Fri",
+        openingHours: "7:00 AM - 9:30 PM",
         sessions: [
-          { title: "Vinyasa flow", time: "7:00 AM" },
-          { title: "Hatha", time: "12:15 PM" },
-          { title: "Yin & restorative", time: "7:30 PM" },
+          { title: "Vinyasa flow" },
+          { title: "Hatha" },
+          { title: "Yin & restorative" },
         ],
       },
       {
         days: "Sat",
+        openingHours: "8:30 AM - 1:00 PM",
         sessions: [
-          { title: "Vinyasa · Prenatal", time: "9:00 AM · 11:00 AM" },
+          { title: "Vinyasa · Prenatal" },
         ],
       },
     ],
@@ -186,6 +209,7 @@ export default function CoachingDetailPage() {
       (item) => item.group === "Coaching" && item.name === merchantName,
     ) ?? directoryMerchants.find((item) => item.group === "Coaching")!
   const detail = { ...defaultDetail, ...detailsByMerchant[merchant.name] }
+  const rateRange = formatRateRange(detail.rates, merchant.price)
   const [galleryIndex, setGalleryIndex] = useState(0)
   const [isGalleryPaused, setIsGalleryPaused] = useState(false)
   const [isGalleryDragging, setIsGalleryDragging] = useState(false)
@@ -380,8 +404,7 @@ export default function CoachingDetailPage() {
           >
             <h1 id="coaching-detail-name">{merchant.name}</h1>
             <p>
-              {merchant.category} · {detail.area} · ${merchant.price}-
-              {merchant.price + 20} per {merchant.unit}
+              {merchant.category} · {detail.area} · {rateRange} per {merchant.unit}
             </p>
             <strong className={merchant.openNow ? "is-open" : ""}>
               {merchant.openNow ? "Open now" : "Closed now"} ·{" "}
@@ -477,10 +500,10 @@ export default function CoachingDetailPage() {
                 <div className="coaching-detail__timetable-day" key={day.days}>
                   <span>{day.days}</span>
                   <div>
-                    {day.sessions.map((session) => (
+                    {day.sessions.map((session, index) => (
                       <p key={`${day.days}-${session.title}`}>
                         <strong>{session.title}</strong>
-                        <time>{session.time}</time>
+                        {index === 0 && <time>{day.openingHours}</time>}
                       </p>
                     ))}
                   </div>
@@ -488,7 +511,7 @@ export default function CoachingDetailPage() {
               ))}
             </div>
             <p className="coaching-detail__notice">
-              Times are indicative. Message the coach to confirm a spot -
+              Opening hours may vary. Message the coach to confirm a spot -
               booking is not handled here.
             </p>
           </section>

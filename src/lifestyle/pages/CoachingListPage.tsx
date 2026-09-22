@@ -21,7 +21,6 @@ import {
   directoryGroups,
   directoryGroupTitles,
   directoryMerchants,
-  isDiscountBadge,
   parseSectionGroup,
   type DirectoryMerchant,
 } from "./merchantDirectory"
@@ -500,9 +499,6 @@ function MerchantCard({
   const content = (
     <>
       <img src={merchant.image} alt={merchant.name} loading="lazy" />
-      {isDiscountBadge(merchant.badge) && (
-        <span className="lifestyle-list__card-badge">{merchant.badge}</span>
-      )}
       <div className="lifestyle-list__card-body">
         <h2 className="lifestyle-list__card-name">{merchant.name}</h2>
         <span className="lifestyle-list__card-provider">

@@ -20,6 +20,7 @@ import {
   Store01Icon,
 } from "@hugeicons/core-free-icons"
 import logoDark from "../imports/logo-dark.png"
+import PortalSwitcher from "../components/PortalSwitcher"
 
 type MerchantView = "bid-request"
 
@@ -399,7 +400,11 @@ function MerchantField({
   )
 }
 
-export default function MerchantDashboard({ onExit }: { onExit: () => void }) {
+export default function MerchantDashboard({
+  onSwitchPortal,
+}: {
+  onSwitchPortal: (portal: "property-dashboard" | "merchant-dashboard" | "finance-dashboard") => void
+}) {
   const [view, setView] = useState<MerchantView>("bid-request")
   return (
     <div className="property-app figma-capture-root merchant-app">
@@ -408,9 +413,7 @@ export default function MerchantDashboard({ onExit }: { onExit: () => void }) {
         <MerchantTopbar />
         <main className="property-main">
           {view === "bid-request" && <MerchantBidRequest />}
-          <button type="button" className="property-exit" onClick={onExit}>
-            切换端口
-          </button>
+          <PortalSwitcher current="merchant-dashboard" onSwitch={onSwitchPortal} />
         </main>
       </div>
     </div>

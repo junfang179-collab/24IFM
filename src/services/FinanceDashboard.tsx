@@ -16,8 +16,7 @@ import {
   UserGroupIcon,
 } from "@hugeicons/core-free-icons"
 import logoDark from "../imports/logo-dark.png"
-
-type FinanceView = "invoice-inbox"
+import PortalSwitcher from "../components/PortalSwitcher"
 
 function Icon({
   icon,
@@ -131,13 +130,7 @@ function FinanceTopbar() {
   )
 }
 
-function FinanceNav({
-  view,
-  onView,
-}: {
-  view: FinanceView
-  onView: (view: FinanceView) => void
-}) {
+function FinanceNav() {
   return (
     <>
       <nav className="finance-primary-nav" aria-label="Finance navigation">
@@ -156,38 +149,6 @@ function FinanceNav({
             )}
           </button>
         ))}
-      </nav>
-      <nav
-        className="finance-secondary-nav"
-        aria-label="Supplier payment navigation"
-      >
-        <div className="finance-secondary-label">
-          <Icon icon={Invoice01Icon} size={17} /> Supplier Payments — Tender
-          Invoices
-        </div>
-        <button
-          type="button"
-          className={`finance-secondary-item ${
-            view === "invoice-inbox" ? "active" : ""
-          }`}
-          onClick={() => onView("invoice-inbox")}
-        >
-          Invoice Inbox <span>5</span>
-        </button>
-        <button
-          type="button"
-          className="finance-secondary-item disabled"
-          disabled
-        >
-          Invoice Detail <small>Soon</small>
-        </button>
-        <button
-          type="button"
-          className="finance-secondary-item disabled"
-          disabled
-        >
-          Finance Review <small>Soon</small>
-        </button>
       </nav>
     </>
   )
@@ -353,21 +314,18 @@ function FinanceInvoiceInbox() {
   )
 }
 
-export default function FinanceDashboard({ onExit }: { onExit: () => void }) {
-  const [view, setView] = useState<FinanceView>("invoice-inbox")
+export default function FinanceDashboard({
+  onSwitchPortal,
+}: {
+  onSwitchPortal: (portal: "property-dashboard" | "merchant-dashboard" | "finance-dashboard") => void
+}) {
   return (
     <div className="finance-app figma-capture-root">
       <FinanceTopbar />
-      <FinanceNav view={view} onView={setView} />
+      <FinanceNav />
       <main className="finance-main">
-        {view === "invoice-inbox" && <FinanceInvoiceInbox />}
-        <button
-          type="button"
-          className="property-exit finance-exit"
-          onClick={onExit}
-        >
-          切换端口
-        </button>
+        <FinanceInvoiceInbox />
+        <PortalSwitcher current="finance-dashboard" onSwitch={onSwitchPortal} />
       </main>
     </div>
   )
