@@ -2001,7 +2001,7 @@ function Heading6() {
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
         <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Bold',sans-serif] font-bold leading-[normal] left-[78.05px] not-italic text-[#16324f] text-[24px] text-center top-0 whitespace-nowrap">
-          Aircon
+          Aircon cleaning
         </p>
       </div>
     </div>
@@ -2141,7 +2141,7 @@ function Heading7() {
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
         <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Bold',sans-serif] font-bold leading-[normal] left-[80.29px] not-italic text-[#16324f] text-[24px] text-center top-0 whitespace-nowrap">
-          Cleaning
+          Home cleaning
         </p>
       </div>
     </div>
@@ -2309,7 +2309,7 @@ function Heading8() {
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
         <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Bold',sans-serif] font-bold leading-[normal] left-[78.98px] not-italic text-[#16324f] text-[24px] text-center top-0 whitespace-nowrap">
-          Handyman
+          Handyman &amp; Repair
         </p>
       </div>
     </div>
@@ -2625,7 +2625,7 @@ function Container54() {
 function Container37() {
   return (
     <div
-      className="h-[224px] relative shrink-0 w-full"
+      className="h-[252px] relative shrink-0 w-full"
       data-name="Container"
     >
       <div className="overflow-clip rounded-[inherit] size-full">
@@ -2786,7 +2786,7 @@ function Container62() {
       data-name="Container"
     >
       <p className="[word-break:break-word] absolute font-['Inter:Medium',sans-serif] font-medium leading-[normal] left-[16px] not-italic text-[#61798d] text-[11px] text-left top-0 whitespace-nowrap">
-        From $45
+        Kids &amp; adults
       </p>
     </div>
   )
@@ -2884,7 +2884,7 @@ function Container66() {
       data-name="Container"
     >
       <p className="[word-break:break-word] absolute font-['Inter:Medium',sans-serif] font-medium leading-[normal] left-[16px] not-italic text-[#61798d] text-[11px] text-left top-0 whitespace-nowrap">
-        From $60
+        60 / 90 min sessions
       </p>
     </div>
   )
@@ -2982,7 +2982,7 @@ function Container70() {
       data-name="Container"
     >
       <p className="[word-break:break-word] absolute font-['Inter:Medium',sans-serif] font-medium leading-[normal] left-[16px] not-italic text-[#61798d] text-[11px] text-left top-0 whitespace-nowrap">
-        From $30
+        Weekend coaching groups
       </p>
     </div>
   )
@@ -3080,7 +3080,7 @@ function Container74() {
       data-name="Container"
     >
       <p className="[word-break:break-word] absolute font-['Inter:Medium',sans-serif] font-medium leading-[normal] left-[16px] not-italic text-[#61798d] text-[11px] text-left top-0 whitespace-nowrap">
-        From $25
+        Small group yoga classes
       </p>
     </div>
   )
@@ -3124,7 +3124,7 @@ function Container71() {
 function Container58() {
   return (
     <div
-      className="h-[240px] relative shrink-0 w-full"
+      className="h-[270px] relative shrink-0 w-full"
       data-name="Container"
     >
       <div className="overflow-clip rounded-[inherit] size-full">
@@ -3152,7 +3152,7 @@ function ContainerMargin19() {
 
 function Frame7() {
   return (
-    <div className="absolute h-[327px] left-0 top-[1486.85px] w-[780px]">
+    <div className="absolute h-[357px] left-0 top-[1514.85px] w-[780px]">
       <ContainerMargin18 />
       <ContainerMargin19 />
     </div>
@@ -3265,7 +3265,7 @@ function Container78() {
 function Container76() {
   return (
     <div
-      className="bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
+      className="home-property-news-card bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
       data-name="Container"
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start min-w-[inherit] overflow-clip relative rounded-[inherit] size-full">
@@ -3346,7 +3346,7 @@ function Container81() {
 function Container79() {
   return (
     <div
-      className="bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
+      className="home-property-news-card bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
       data-name="Container"
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start min-w-[inherit] overflow-clip relative rounded-[inherit] size-full">
@@ -3427,7 +3427,7 @@ function Container84() {
 function Container82() {
   return (
     <div
-      className="bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
+      className="home-property-news-card bg-white h-full min-w-[248.20831298828125px] relative rounded-[36.197px] shadow-[0px_12.928px_36.197px_0px_rgba(20,40,70,0.07)] shrink-0 w-[248.208px]"
       data-name="Container"
     >
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start min-w-[inherit] overflow-clip relative rounded-[inherit] size-full">
@@ -3464,7 +3464,7 @@ function ContainerMargin25() {
 
 function Frame8() {
   return (
-    <div className="absolute h-[399px] left-0 top-[2148px] w-[780px]">
+    <div className="absolute h-[399px] left-0 top-[2206px] w-[780px]">
       <ContainerMargin24 />
       <ContainerMargin25 />
     </div>
@@ -3811,7 +3811,7 @@ function StickyPlaceholderContainer() {
 
 function Frame6() {
   return (
-    <div className="absolute h-[366px] left-0 top-[1814px] w-[780px]">
+    <div className="absolute h-[366px] left-0 top-[1864px] w-[780px]">
       <ContainerMargin26 />
       <ContainerMargin27 />
       <StickyPlaceholderContainer />
@@ -4605,7 +4605,7 @@ function Frame11() {
 function StickyPlaceholderContainerMargin() {
   return (
     <div
-      className="absolute h-[392px] left-0 overflow-visible right-0 top-[2561px]"
+      className="absolute h-[392px] left-0 overflow-visible right-0 top-[2619px]"
       data-name="Sticky placeholder – Container (margin)"
     >
       <Frame11 />
@@ -5012,7 +5012,7 @@ function Container116() {
 function Container112() {
   return (
     <div
-      className="absolute h-[205px] left-0 top-[2748px] w-[780px]"
+      className="absolute h-[205px] left-0 top-[2806px] w-[780px]"
       data-name="Container"
     >
       <Container113 />
