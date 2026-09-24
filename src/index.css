@@ -336,3 +336,24 @@ body {
 .finance-kpi.pending small { color: #a58f63; }
 .finance-kpi.recurring small { color: #78a08a; }
 .finance-kpi.adhoc small { color: #9a8ab3; }
+
+/* Keep the home feature carousel visually identical to Lifestyle Style 5. */
+.home-popular-card-row > [data-name="Container"] { border-radius: 24px !important; height: 224px !important; min-width: 210px !important; width: 210px !important; }
+.home-popular-card-row > [data-name="Container"] > div { border-radius: inherit; }
+.home-popular-card-row > [data-name="Container"] > div > [data-name="Container"]:first-child { height: 126px !important; }
+.home-popular-card-row > [data-name="Container"] > div > [data-name="Container"]:last-child > div { align-items: center !important; padding: 12px 16px 16px !important; }
+div:has(> .home-popular-card-row), div:has(> .home-feature-card-row) { overflow-clip-margin-block: 12px !important; }
+.home-feature-card { border: 0 !important; border-radius: 24px !important; box-shadow: 0px 10px 28px 0px rgba(20,40,70,0.07) !important; flex: 0 0 210px !important; height: 234px !important; min-width: 210px !important; overflow: hidden; width: 210px !important; }
+.home-feature-card > div { border-radius: inherit; }
+.home-feature-card .lifestyle-style-five__service-visual { background: #eaf5fa; flex: 0 0 126px; height: 126px !important; overflow: hidden; }
+.home-feature-card .lifestyle-style-five__service-visual > div { height: 100% !important; left: 0 !important; top: 0 !important; width: 100% !important; }
+.home-feature-card .lifestyle-style-five__service-visual [data-name="Image"] { height: 100% !important; width: 100% !important; }
+.home-feature-card .lifestyle-style-five__service-visual img { display: block; height: 100%; object-fit: cover; width: 100%; }
+.home-feature-card .lifestyle-style-five__service-content { flex: 1; min-width: 0; overflow: hidden; padding: 12px 16px 11px !important; }
+.home-feature-card [data-name="Heading 4"] { height: 54px !important; width: 100% !important; }
+.home-feature-card [data-name="Heading 4"] > div { height: 100%; width: 100%; }
+.home-feature-card [data-name="Heading 4"] p { -webkit-box-orient: vertical; -webkit-line-clamp: 2; color: #16324f; display: -webkit-box; font: 700 24px/27px "Inter:Bold", sans-serif; left: 0 !important; margin: 0; overflow: hidden; position: relative !important; text-align: center; text-overflow: ellipsis; top: 0 !important; transform: none !important; white-space: normal; width: 100%; }
+.home-feature-card [data-name="Container (margin)"] { height: 23px; margin-top: 0; padding: 0; width: 100%; }
+.home-feature-card [data-name="Container (margin)"] > div { height: 100%; width: 100%; }
+.home-feature-card [data-name="Container (margin)"] [data-name="Container"] { width: 100% !important; }
+.home-feature-card [data-name="Container (margin)"] p { color: #1c9dd7; display: block; font: 700 23px/23px "Inter:Bold", sans-serif; left: 0 !important; margin: 0; overflow: hidden; position: relative !important; text-align: center; text-overflow: ellipsis; top: 0 !important; transform: none !important; white-space: nowrap; width: 100%; }

@@ -67,7 +67,17 @@ const validScreens: Screen[] = [
 
 function initialScreen(): Screen {
   const value = new URLSearchParams(window.location.search).get("screen")
-  return validScreens.includes(value as Screen) ? (value as Screen) : "home"
+  if (validScreens.includes(value as Screen)) return value as Screen
+
+  const entryScreens: Record<string, Screen> = {
+    "property.html": "property-dashboard",
+    "merchant.html": "merchant-dashboard",
+    "finance.html": "finance-dashboard",
+  }
+  const entryName = window.location.pathname.split("/").pop()?.toLowerCase()
+  return entryName && entryScreens[entryName]
+    ? entryScreens[entryName]
+    : "home"
 }
 
 const ROLE_OPTIONS: {
