@@ -15,7 +15,11 @@ import schoolsIcon from "../images/category-icons/schools.png"
 import swimmingIcon from "../images/category-icons/swimming.png"
 import StyleFiveMerchantCards from "./StyleFiveMerchantCards"
 import LifestyleVariantHeader from "./LifestyleVariantHeader"
-import { directoryMerchants, parseSectionGroup } from "./merchantDirectory"
+import {
+  detailRouteByGroup,
+  directoryMerchants,
+  parseSectionGroup,
+} from "./merchantDirectory"
 import type { LifestyleService } from "./lifestyleServices"
 
 const categoryItems: {
@@ -520,12 +524,17 @@ const styleFiveDirectorySections = styleFiveCategoryGroups.map(
   }),
 )
 
-function getCoachingDetailName(name: string) {
-  if (name === "AquaStart Coaching") return "AquaKids Swimming"
-  return directoryMerchants.some(
-    (merchant) => merchant.group === "Coaching" && merchant.name === name,
-  )
-    ? name
+function getDetailName(name: string, sectionTitle: string) {
+  if (name === "AquaStart Coaching") {
+    return { group: "Coaching", detailName: "AquaKids Swimming" }
+  }
+  const group = parseSectionGroup(sectionTitle)
+  const merchant =
+    directoryMerchants.find(
+      (item) => item.group === group && item.name === name,
+    ) ?? directoryMerchants.find((item) => item.name === name)
+  return merchant
+    ? { group: merchant.group, detailName: merchant.name }
     : undefined
 }
 
@@ -920,12 +929,16 @@ export default function StyleFiveHomePage({
                   showTrust={!isPromotionalSection}
                   useAllServiceCard={section.useAllServiceCard}
                   isServiceClickable={(service) =>
-                    Boolean(getCoachingDetailName(service.name))
+                    Boolean(getDetailName(service.name, section.title))
                   }
                   onServiceClick={(merchant) => {
-                    const detailName = getCoachingDetailName(merchant.name)
-                    if (!detailName) return
-                    navigate(`/coaching/${encodeURIComponent(detailName)}`)
+                    const target = getDetailName(merchant.name, section.title)
+                    if (!target) return
+                    navigate(
+                      `${detailRouteByGroup[target.group]}/${encodeURIComponent(
+                        target.detailName,
+                      )}`,
+                    )
                   }}
                 />
               </section>

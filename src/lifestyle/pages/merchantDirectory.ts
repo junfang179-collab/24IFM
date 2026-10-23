@@ -48,6 +48,14 @@ export const sectionGroupLookup: Record<string, string> = {
   "Popular merchants": "All",
 }
 
+export const detailRouteByGroup: Record<string, string> = {
+  Coaching: "/coaching",
+  Education: "/education",
+  "Pet care": "/pet-care",
+  "Beauty & wellness": "/beauty-wellness",
+  Health: "/health",
+}
+
 export const directoryMerchants: DirectoryMerchant[] = [
   {
     name: "AquaKids Swimming",

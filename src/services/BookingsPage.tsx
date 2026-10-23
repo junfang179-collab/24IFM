@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react"
+import { useMemo, useState, type CSSProperties } from "react"
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react"
 import {
   Building02Icon,
   Bug01Icon,
   Calendar03Icon,
+  CalendarRemove02Icon,
   CheckmarkCircle01Icon,
   CleaningBucketIcon,
   Clock03Icon,
@@ -22,6 +23,9 @@ import pestIllustration from "../imports/Services/popular-pest-control.png"
 import cleaningIllustration from "../imports/Services/popular-cleaning.png"
 import StyleTwoPageHeader from "./StyleTwoPageHeader"
 import ResidentBottomNav from "../components/ResidentBottomNav"
+import WhatsAppGlyph, {
+  WHATSAPP_ICON_GREEN,
+} from "../components/WhatsAppGlyph"
 
 type BookingStatus = "merchant" | "merchant-confirmed" | "professional-assigned" | "on-the-way" | "in-service" | "completed" | "cancelled"
 
@@ -287,6 +291,44 @@ function FlowIcon({
   return (
     <HugeiconsIcon icon={icon} size={size} color={color} strokeWidth={1.8} />
   )
+}
+
+const HEADER_ICON_BUTTON: CSSProperties = {
+  width: 44,
+  height: 44,
+  minWidth: 44,
+  border: "none",
+  borderRadius: "50%",
+  background: "#EFF8FD",
+  color: "#1c9dd7",
+  display: "grid",
+  placeItems: "center",
+  cursor: "pointer",
+}
+
+/**
+ * 头部无底色按钮需要向右偏移的距离，用来让图标右缘与下方卡片右缘对齐：
+ *   头部左右 padding 16px，内容区（卡片）左右 padding 12px → 差 4px
+ *   26px 图标居中在 44px 热区里，右侧还留了 (44 - 26) / 2 = 9px 空隙
+ *   合计 4 + 9 = 13px
+ */
+const HEADER_TRAILING_ALIGN_OFFSET = -13
+
+/** 无底色圆形容器：仅提供 44x44 点击热区，图标直接浮在页面上 */
+const HEADER_GHOST_BUTTON: CSSProperties = {
+  width: 44,
+  height: 44,
+  minWidth: 44,
+  padding: 0,
+  border: "none",
+  borderRadius: "50%",
+  background: "transparent",
+  display: "grid",
+  placeItems: "center",
+  cursor: "pointer",
+  // 用相对位移右移：只移动视觉与点击区域，不改变布局占位，标题居中不受影响
+  position: "relative",
+  right: HEADER_TRAILING_ALIGN_OFFSET,
 }
 
 function statusForFilter(status: BookingStatus): BookingFilter {
@@ -846,6 +888,7 @@ function BookingDetail({
     { label: "Location", value: booking.address, icon: Location01Icon },
     { label: "Add-ons", value: booking.addOns, icon: TaskDone01Icon },
   ]
+  const canCancel = isInProgress && !isProfessionalAssigned && !cancelRequested
 
   return (
     <div
@@ -862,6 +905,34 @@ function BookingDetail({
         title="Booking details"
         onBack={onBack}
         backLabel="Back to bookings"
+        trailing={
+          canCancel ? (
+            <button
+              type="button"
+              onClick={() => setIsCancelOpen(true)}
+              aria-label="Cancel booking"
+              title="Cancel booking"
+              style={HEADER_ICON_BUTTON}
+            >
+              <HugeiconsIcon
+                icon={CalendarRemove02Icon}
+                size={20}
+                color="#1C9DD7"
+                strokeWidth={1.8}
+              />
+            </button>
+          ) : isCompleted ? (
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              aria-label="Chat with merchant on WhatsApp"
+              title="Chat on WhatsApp"
+              style={HEADER_GHOST_BUTTON}
+            >
+              <WhatsAppGlyph size={26} color={WHATSAPP_ICON_GREEN} />
+            </button>
+          ) : null
+        }
       />
 
       <main
@@ -1106,24 +1177,25 @@ function BookingDetail({
           <ServiceCompletedPhotos booking={booking} />
         )}
 
-        {isInProgress && !isProfessionalAssigned && !cancelRequested && (
+        {canCancel && (
           <button
             type="button"
-            onClick={() => setIsCancelOpen(true)}
+            onClick={onBack}
             style={{
               width: "100%",
-              minHeight: 44,
+              minHeight: 46,
               marginTop: 14,
-              border: `1px solid ${C.red}`,
+              border: "none",
               borderRadius: 12,
-              background: C.white,
-              color: C.red,
-              fontSize: 12,
+              background: C.primary,
+              color: C.white,
+              fontSize: 13,
               fontWeight: 900,
               cursor: "pointer",
+              boxShadow: "0 8px 18px rgba(28,157,215,0.25)",
             }}
           >
-            Cancel booking
+            View All Bookings
           </button>
         )}
 

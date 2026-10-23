@@ -18,7 +18,14 @@ interface StyleFiveMerchantCardsProps {
   isServiceClickable?: (service: LifestyleService) => boolean
 }
 
-type DragPointer = { id: number startX: number startScroll: number }
+type DragPointer = {
+  id: number
+  startX: number
+  startScroll: number
+  cardIndex: number | null
+}
+
+const DRAG_THRESHOLD = 8
 
 export default function StyleFiveMerchantCards({
   services,
@@ -31,15 +38,32 @@ export default function StyleFiveMerchantCards({
 }: StyleFiveMerchantCardsProps) {
   const pointerRef = useRef<DragPointer | null>(null)
   const suppressClickRef = useRef(false)
+  const handledByPointerRef = useRef(false)
   const [isDragging, setIsDragging] = useState(false)
 
   const finishDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     const pointer = pointerRef.current
     if (!pointer || pointer.id !== event.pointerId) return
-    suppressClickRef.current = Math.abs(event.clientX - pointer.startX) > 8
     pointerRef.current = null
     setIsDragging(false)
-    event.currentTarget.releasePointerCapture?.(event.pointerId)
+
+    const moved = Math.abs(event.clientX - pointer.startX) > DRAG_THRESHOLD
+    suppressClickRef.current = moved
+    if (moved || pointer.cardIndex === null) return
+
+    const service = services[pointer.cardIndex]
+    if (!service || !onServiceClick) return
+    if (!(isServiceClickable?.(service) ?? true)) return
+
+    handledByPointerRef.current = true
+    onServiceClick(service)
+  }
+
+  const cancelDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const pointer = pointerRef.current
+    if (!pointer || pointer.id !== event.pointerId) return
+    pointerRef.current = null
+    setIsDragging(false)
   }
 
   return (
@@ -52,12 +76,17 @@ export default function StyleFiveMerchantCards({
       tabIndex={0}
       onPointerDown={(event) => {
         if (event.button !== 0 || pointerRef.current) return
+        const card = (event.target as Element | null)?.closest?.(
+          "[data-card-index]",
+        )
         pointerRef.current = {
           id: event.pointerId,
           startX: event.clientX,
           startScroll: event.currentTarget.scrollLeft,
+          cardIndex: card ? Number(card.getAttribute("data-card-index")) : null,
         }
         suppressClickRef.current = false
+        handledByPointerRef.current = false
         setIsDragging(true)
         event.currentTarget.setPointerCapture?.(event.pointerId)
       }}
@@ -68,7 +97,7 @@ export default function StyleFiveMerchantCards({
           pointer.startScroll - (event.clientX - pointer.startX)
       }}
       onPointerUp={finishDrag}
-      onPointerCancel={finishDrag}
+      onPointerCancel={cancelDrag}
       onClickCapture={(event) => {
         if (!suppressClickRef.current) return
         event.preventDefault()
@@ -76,7 +105,7 @@ export default function StyleFiveMerchantCards({
         suppressClickRef.current = false
       }}
     >
-      {services.map((service) => {
+      {services.map((service, index) => {
         const cardClass = `lifestyle-style-five__service${
           useAllServiceCard ? " is-all-services" : ""
         }`
@@ -151,15 +180,26 @@ export default function StyleFiveMerchantCards({
         return canOpen ? (
           <button
             className={cardClass}
+            data-card-index={index}
             key={service.name}
             type="button"
-            onClick={() => onServiceClick?.(service)}
+            onClick={() => {
+              if (handledByPointerRef.current) {
+                handledByPointerRef.current = false
+                return
+              }
+              onServiceClick?.(service)
+            }}
             aria-label={`Open ${service.name}`}
           >
             {cardContent}
           </button>
         ) : (
-          <article className={cardClass} key={service.name}>
+          <article
+            className={cardClass}
+            data-card-index={index}
+            key={service.name}
+          >
             {cardContent}
           </article>
         )

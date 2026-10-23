@@ -18,6 +18,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import StyleTwoPageHeader from "../../services/StyleTwoPageHeader"
 import {
+  detailRouteByGroup,
   directoryGroups,
   directoryGroupTitles,
   directoryMerchants,
@@ -457,20 +458,23 @@ export default function CoachingListPage() {
           </div>
         ) : (
           <div className="lifestyle-list__grid">
-            {filtered.map((merchant) => (
-              <MerchantCard
-                key={merchant.name}
-                merchant={merchant}
-                onOpen={
-                  merchant.group === "Coaching"
-                    ? () =>
-                        navigate(
-                          `/coaching/${encodeURIComponent(merchant.name)}`,
-                        )
-                    : undefined
-                }
-              />
-            ))}
+            {filtered.map((merchant) => {
+              const detailRoute = detailRouteByGroup[merchant.group]
+              return (
+                <MerchantCard
+                  key={merchant.name}
+                  merchant={merchant}
+                  onOpen={
+                    detailRoute
+                      ? () =>
+                          navigate(
+                            `${detailRoute}/${encodeURIComponent(merchant.name)}`,
+                          )
+                      : undefined
+                  }
+                />
+              )
+            })}
           </div>
         )}
       </section>

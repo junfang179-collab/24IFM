@@ -16,6 +16,7 @@ import {
 } from "@hugeicons/core-free-icons"
 import StyleTwoPageHeader from "./StyleTwoPageHeader"
 import ResidentBottomNav from "../components/ResidentBottomNav"
+import WhatsAppGlyph, { WHATSAPP_GREEN } from "../components/WhatsAppGlyph"
 
 type View = "home" | "category" | "order" | "contact" | "chat"
 
@@ -490,10 +491,12 @@ function SupportTwoHome({
   onBack,
   onHome,
   onBookings,
+  onContact,
 }: {
   onBack: () => void
   onHome: () => void
   onBookings: () => void
+  onContact: () => void
 }) {
   const [query, setQuery] = useState("")
   const [openArticle, setOpenArticle] = useState<string | null>(null)
@@ -513,6 +516,7 @@ function SupportTwoHome({
   return (
     <div
       style={{
+        position: "relative",
         height: "100%",
         display: "flex",
         flexDirection: "column",
@@ -638,6 +642,31 @@ function SupportTwoHome({
           </div>
         </section>
       </main>
+      <button
+        type="button"
+        onClick={onContact}
+        aria-label="Chat with support on WhatsApp"
+        title="Chat on WhatsApp"
+        style={{
+          position: "absolute",
+          right: 16,
+          bottom: 78,
+          zIndex: 5,
+          width: 54,
+          height: 54,
+          minWidth: 54,
+          border: "none",
+          borderRadius: "50%",
+          background: WHATSAPP_GREEN,
+          color: C.white,
+          display: "grid",
+          placeItems: "center",
+          cursor: "pointer",
+          boxShadow: "0 8px 22px rgba(0,215,87,0.42)",
+        }}
+      >
+        <WhatsAppGlyph size={23} color={C.white} />
+      </button>
       <BottomNav onHome={onHome} onBookings={onBookings} />
     </div>
   )
@@ -1511,6 +1540,7 @@ export default function SupportPage({ onBack, onOpenBookings }: Props) {
       onBack={onBack}
       onHome={onBack}
       onBookings={onOpenBookings}
+      onContact={() => setView("contact")}
     />
   )
 }
