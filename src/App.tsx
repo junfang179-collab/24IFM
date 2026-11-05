@@ -3,6 +3,7 @@ import bannerImg from "./imports/Container__1_.png"
 import BookingsPage from "./services/BookingsPage"
 import SupportPage from "./services/SupportPage"
 import CleaningBooking from "./services/CleaningBooking"
+import OwnersMeetingsPage from "./services/OwnersMeetingsPage"
 import ServiceIconsPage from "./services/ServiceIconsPage"
 import PestControlBooking from "./services/PestControlBooking"
 import PlumbingBooking from "./services/PlumbingBooking"
@@ -20,7 +21,7 @@ import ReplicatedServicesPage from "./services/ServicesPage"
 import LifeStylePage from "./lifestyle/LifeStylePage"
 import CopyToFigmaButton from "./components/CopyToFigmaButton"
 import ResidentBottomNav from "./components/ResidentBottomNav"
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
   ArrowLeft01Icon,
@@ -31,6 +32,7 @@ import {
   Calculator01Icon,
   CalendarClockIcon,
   CheckmarkCircle01Icon,
+  Cancel01Icon,
   FileCheckIcon,
   Home01Icon,
   Store01Icon,
@@ -55,7 +57,7 @@ const SERVICES_OVERLAY = {
   height: Math.round(139 * SCALE),
 }
 
-type Screen = "role-select" | "role-preview" | "tender-vote" | "property-dashboard" | "merchant-dashboard" | "finance-dashboard" | "home" | "lifestyle" | "services" | "bookings" | "support" | "cleaning" | "cleaning-step1" | "pest" | "pest-step1" | "plumbing" | "plumbing-step1" | "electrical" | "handyman" | "painting" | "landscaping" | "moving" | "aircon" | "home-support" | "service-icons"
+type Screen = "role-select" | "role-preview" | "tender-vote" | "property-dashboard" | "merchant-dashboard" | "finance-dashboard" | "home" | "lifestyle" | "services" | "bookings" | "support" | "cleaning" | "cleaning-step1" | "pest" | "pest-step1" | "plumbing" | "plumbing-step1" | "electrical" | "handyman" | "painting" | "landscaping" | "moving" | "aircon" | "home-support" | "service-icons" | "owners-meetings"
 type AppRole = "resident" | "property" | "finance" | "merchant"
 
 const validScreens: Screen[] = [
@@ -63,7 +65,7 @@ const validScreens: Screen[] = [
   "merchant-dashboard", "finance-dashboard", "home", "lifestyle", "services",
   "bookings", "support", "cleaning", "cleaning-step1", "pest", "pest-step1",
   "plumbing", "plumbing-step1", "electrical", "handyman", "painting",
-  "landscaping", "moving", "aircon", "home-support", "service-icons",
+  "landscaping", "moving", "aircon", "home-support", "service-icons", "owners-meetings",
 ]
 
 function initialScreen(): Screen {
@@ -777,6 +779,16 @@ export default function App() {
     )
   }
 
+  // AGM module: two phones side by side (list + details), no in-phone navigation
+  if (screen === "owners-meetings") {
+    return (
+      <>
+        <OwnersMeetingsPage onBack={() => setScreen("home")} />
+        <CopyToFigmaButton />
+      </>
+    )
+  }
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center overflow-x-hidden bg-gradient-to-br from-slate-300 via-slate-400 to-slate-500 py-16">
@@ -1194,6 +1206,141 @@ export default function App() {
         </div>
       </div>
       <CopyToFigmaButton />
+      {screen === "home" && (
+        <div
+          style={{
+            position: "fixed",
+            right: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 60,
+          }}
+        >
+          <AgmLauncher onOpen={() => setScreen("owners-meetings")} />
+        </div>
+      )}
     </>
+  )
+}
+
+/** Collapsible AGM launcher pinned to the Home screen's right edge. */
+function AgmLauncher({ onOpen }: { onOpen: () => void }) {
+  const [expanded, setExpanded] = useState(false)
+
+  const shell: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    boxShadow: "0 8px 18px rgba(28, 157, 215, 0.3)",
+  }
+
+  if (!expanded) {
+    return (
+      <button
+        type="button"
+        onClick={() => setExpanded(true)}
+        aria-label="Expand AGM shortcut"
+        aria-expanded={false}
+        title="AGM — Owners' meetings"
+        style={{
+          ...shell,
+          gap: 5,
+          border: "none",
+          borderRadius: "999px 0 0 999px",
+          background: "#1c9dd7",
+          color: "#ffffff",
+          padding: "10px 12px 10px 15px",
+          cursor: "pointer",
+        }}
+      >
+        <span style={{ fontSize: 12, fontWeight: 900, letterSpacing: 0.5 }}>
+          AGM
+        </span>
+        <HugeiconsIcon
+          icon={ArrowLeft01Icon}
+          size={13}
+          color="#ffffff"
+          strokeWidth={2.4}
+        />
+      </button>
+    )
+  }
+
+  return (
+    <div
+      style={{
+        ...shell,
+        gap: 8,
+        border: "1px solid #dcebf3",
+        borderRight: "none",
+        borderRadius: "999px 0 0 999px",
+        background: "#ffffff",
+        padding: "6px 8px 6px 7px",
+      }}
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label="Open Owners' meetings"
+        title="Open Owners' meetings"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          border: "none",
+          background: "transparent",
+          padding: 0,
+          cursor: "pointer",
+        }}
+      >
+        <span
+          style={{
+            padding: "5px 10px",
+            borderRadius: 999,
+            background: "#1c9dd7",
+            color: "#ffffff",
+            fontSize: 11,
+            fontWeight: 900,
+            letterSpacing: 0.5,
+          }}
+        >
+          AGM
+        </span>
+        <span
+          style={{
+            color: "#16324f",
+            fontSize: 12,
+            fontWeight: 900,
+            whiteSpace: "nowrap",
+          }}
+        >
+          Owners' meetings
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={() => setExpanded(false)}
+        aria-label="Collapse AGM shortcut"
+        title="Collapse"
+        style={{
+          width: 26,
+          height: 26,
+          flexShrink: 0,
+          border: "none",
+          borderRadius: "50%",
+          background: "#EFF8FD",
+          color: "#6b7f91",
+          display: "grid",
+          placeItems: "center",
+          cursor: "pointer",
+        }}
+      >
+        <HugeiconsIcon
+          icon={Cancel01Icon}
+          size={14}
+          color="#6b7f91"
+          strokeWidth={2}
+        />
+      </button>
+    </div>
   )
 }
