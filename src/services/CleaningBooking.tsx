@@ -15,6 +15,7 @@ import {
   Home01Icon,
   House01Icon,
   HouseHeartIcon,
+  LayoutGridIcon,
   Location01Icon,
   MapPinIcon,
   Message01Icon,
@@ -625,12 +626,52 @@ const STYLE_TWO_CATALOGUE_ROWS = [
   },
 ]
 
-function StyleTwoHeader({ step, onBack }: { step: number onBack: () => void }) {
+const HEADER_ICON_BUTTON = {
+  width: 44,
+  height: 44,
+  minWidth: 44,
+  padding: 0,
+  border: "none",
+  borderRadius: "50%",
+  background: "#EFF8FD",
+  color: "#1c9dd7",
+  display: "grid",
+  placeItems: "center",
+  cursor: "pointer",
+} as const
+
+function StyleTwoHeader({
+  step,
+  onBack,
+  onOpenIcons,
+}: {
+  step: number
+  onBack: () => void
+  onOpenIcons?: () => void
+}) {
   return (
     <StyleTwoPageHeader
       title="Cleaning Service"
       subtitle={step > 0 ? `Step ${step} of 5` : undefined}
       onBack={onBack}
+      trailing={
+        onOpenIcons ? (
+          <button
+            type="button"
+            onClick={onOpenIcons}
+            aria-label="View all service icons"
+            title="View all service icons"
+            style={HEADER_ICON_BUTTON}
+          >
+            <HugeiconsIcon
+              icon={LayoutGridIcon}
+              size={20}
+              color="#1C9DD7"
+              strokeWidth={1.8}
+            />
+          </button>
+        ) : null
+      }
     />
   )
 }
@@ -818,9 +859,11 @@ function StyleTwoPriceTable({ compact = false }: { compact?: boolean }) {
 function StyleTwoDetail({
   onBack,
   onBook,
+  onOpenIcons,
 }: {
   onBack: () => void
   onBook: () => void
+  onOpenIcons?: () => void
 }) {
   return (
     <div
@@ -832,7 +875,7 @@ function StyleTwoDetail({
         fontFamily: "Inter, sans-serif",
       }}
     >
-      <StyleTwoHeader step={0} onBack={onBack} />
+      <StyleTwoHeader step={0} onBack={onBack} onOpenIcons={onOpenIcons} />
       <div style={{ flex: 1, overflowY: "auto", padding: "12px 12px 18px" }}>
         <div
           style={{
@@ -2328,12 +2371,14 @@ interface Props {
   onBack: () => void
   onDone: () => void
   initialStep?: number
+  onOpenIcons?: () => void
 }
 
 export default function CleaningBooking({
   onBack,
   onDone,
   initialStep = 0,
+  onOpenIcons,
 }: Props) {
   const [step, setStep] = useState(initialStep)
   const [booking, setBooking] = useState<BookingData>({
@@ -2367,7 +2412,13 @@ export default function CleaningBooking({
   }
 
   if (step === 0)
-    return <StyleTwoDetail onBack={onBack} onBook={() => setStep(1)} />
+    return (
+      <StyleTwoDetail
+        onBack={onBack}
+        onBook={() => setStep(1)}
+        onOpenIcons={onOpenIcons}
+      />
+    )
 
   return (
     <div

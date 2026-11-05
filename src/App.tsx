@@ -3,6 +3,7 @@ import bannerImg from "./imports/Container__1_.png"
 import BookingsPage from "./services/BookingsPage"
 import SupportPage from "./services/SupportPage"
 import CleaningBooking from "./services/CleaningBooking"
+import ServiceIconsPage from "./services/ServiceIconsPage"
 import PestControlBooking from "./services/PestControlBooking"
 import PlumbingBooking from "./services/PlumbingBooking"
 import ElectricalBooking from "./services/ElectricalBooking"
@@ -54,7 +55,7 @@ const SERVICES_OVERLAY = {
   height: Math.round(139 * SCALE),
 }
 
-type Screen = "role-select" | "role-preview" | "tender-vote" | "property-dashboard" | "merchant-dashboard" | "finance-dashboard" | "home" | "lifestyle" | "services" | "bookings" | "support" | "cleaning" | "cleaning-step1" | "pest" | "pest-step1" | "plumbing" | "plumbing-step1" | "electrical" | "handyman" | "painting" | "landscaping" | "moving" | "aircon" | "home-support"
+type Screen = "role-select" | "role-preview" | "tender-vote" | "property-dashboard" | "merchant-dashboard" | "finance-dashboard" | "home" | "lifestyle" | "services" | "bookings" | "support" | "cleaning" | "cleaning-step1" | "pest" | "pest-step1" | "plumbing" | "plumbing-step1" | "electrical" | "handyman" | "painting" | "landscaping" | "moving" | "aircon" | "home-support" | "service-icons"
 type AppRole = "resident" | "property" | "finance" | "merchant"
 
 const validScreens: Screen[] = [
@@ -62,7 +63,7 @@ const validScreens: Screen[] = [
   "merchant-dashboard", "finance-dashboard", "home", "lifestyle", "services",
   "bookings", "support", "cleaning", "cleaning-step1", "pest", "pest-step1",
   "plumbing", "plumbing-step1", "electrical", "handyman", "painting",
-  "landscaping", "moving", "aircon", "home-support",
+  "landscaping", "moving", "aircon", "home-support", "service-icons",
 ]
 
 function initialScreen(): Screen {
@@ -1054,7 +1055,14 @@ export default function App() {
                 <CleaningBooking
                   onBack={() => setScreen("services")}
                   onDone={() => setScreen("services")}
+                  onOpenIcons={() => setScreen("service-icons")}
                 />
+              </div>
+            )}
+
+            {screen === "service-icons" && (
+              <div style={{ height: SCREEN_H, overflow: "hidden" }}>
+                <ServiceIconsPage onBack={() => setScreen("cleaning")} />
               </div>
             )}
 
